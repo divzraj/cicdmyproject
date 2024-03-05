@@ -3,7 +3,7 @@ pipeline{
     tools{
         jdk "java8"
         maven "mvn"
-    
+    }
     stages{
         stage("Fetch code from repo"){
             steps{
