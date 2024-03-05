@@ -7,7 +7,7 @@ pipeline{
     stages{
         stage("Fetch code from repo"){
             steps{
-                git "git@github.com:divzraj/cicdmyproject.git"
+                git branch: main, url: "git@github.com:divzraj/cicdmyproject.git"
             }
         }
     }
