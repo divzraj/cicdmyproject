@@ -28,5 +28,24 @@ pipeline{
                 sh "mvn test"
             }
         }
-    }
+
+        stage("Integration check"){
+            steps{
+                sh "mvn verify -DskipTests"
+            }
+        }
+        
+
+        stage("Code analysis with checkstyle"){
+            steps{
+                sh "mvn checksytle:checkstyle"
+            }
+            post{
+                success{
+                    echo "Analysis report generated"
+                }
+         
+                }
+        }
+}
 }
