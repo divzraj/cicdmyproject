@@ -38,7 +38,7 @@ pipeline{
 
         stage("Code analysis with checkstyle"){
             steps{
-                sh "mvn checksytle:checkstyle"
+                sh "mvn checkstyle:checkstyle"
             }
             post{
                 success{
