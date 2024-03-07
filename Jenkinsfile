@@ -1,11 +1,11 @@
 pipeline{
     agent any
     tools{
-        jdk "java8"
+        jdk "java11"
         maven "mvn"
     }
     environment{
-        scannerHome = tool 'sonarscanner4'
+        scannerHome = tool 'sonarscanner'
     }
 
     stages{
@@ -55,8 +55,8 @@ pipeline{
         stage("code analysis with sonarqube"){
             steps{
                 withSonarQubeEnv('sonarserver'){
-                 sh '''${scannerHome}/bin/sonar-scanner  -Dsonar.projectKey=mycicdproject \
-                   -Dsonar.projectName=mycicdproject \
+                 sh '''${scannerHome}/bin/sonar-scanner  -Dsonar.projectKey=cicdproject \
+                   -Dsonar.projectName=cicdproject \
                    -Dsonar.projectVersion=1.0 \
                    -Dsonar.sources=src/ \
                    -Dsonar.java.binaries=target/test-classes/com/visualpathit/account/controllerTest/ \
