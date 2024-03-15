@@ -6,7 +6,7 @@ pipeline{
     }
     environment{
         scannerHome = tool 'sonarscanner'
-        imageregistry_username_imagename = "divyar123nag/appcont"
+        imageregistry_username_imagename = "divyar123nag/cicdproject"
         credfordockerlogin = "dockerhublogin"
     }
 
