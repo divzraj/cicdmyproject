@@ -6,6 +6,8 @@ pipeline{
     }
     environment{
         scannerHome = tool 'sonarscanner'
+        imageregistry_username_imagename = "divyar123nag/appcont"
+        credfordockerlogin = "dockerhublogin"
     }
 
     stages{
@@ -70,6 +72,32 @@ pipeline{
                  }
         }
 
-}
+         }
+
+
+        stage("Build Image with Docker"){
+            steps{
+                script{
+                    docImage = docker.build imageregistry_username_imagename + ":V$BUILD_NUMBER"
+                }
+            }
+        }
+
+        stage("Push Image to Dockerhub"){
+            steps{
+                script{
+                    docker.withRegistry('', credfordockerlogin ){
+                    docImage.push("V$BUILD_NUMBER")
+                    docImage.push('latest')
+                    }
+                }
+            }
+        }
+
+        stage("Remove unused Docker Images"){
+            steps{
+                sh " docker rmi $imageregistry_username_imagename:V$BUILD_NUMBER"
+            }
+        }
 }
 }
