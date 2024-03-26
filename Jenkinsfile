@@ -7,6 +7,7 @@ pipeline{
     environment{
         scannerHome = tool 'sonarscanner'
         imageregistry_username_imagename = "divyar123nag/cicdproject"
+        mageregistry_username_dbimagename = "imranvisualpath/8pmdbimg:v1"
         credfordockerlogin = "dockerhublogin"
     }
 
@@ -106,7 +107,7 @@ pipeline{
                 label 'kops'
             }
             steps {
-                    sh "helm upgrade --install --force vproifle-stack helm/vprofilecharts --set appimage=${registry}:${BUILD_NUMBER} --namespace prod"
+                    sh "helm upgrade --install --force mystack helm/mycharts --set appimage=${imageregistry_username_imagename}:V${BUILD_NUMBER},dbimage=${imageregistry_username_dbimagename} --namespace testing"
             }
         }
 }
