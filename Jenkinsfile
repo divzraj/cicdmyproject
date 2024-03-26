@@ -13,7 +13,7 @@ pipeline{
     stages{
         stage("Fetch code from repo"){
             steps{
-                git branch: "main", url: "https://github.com/divzraj/cicdmyproject.git"
+                git branch: "main", url: "git@github.com:divzraj/cicdmyproject.git"
             }
         }
 
@@ -100,6 +100,16 @@ pipeline{
         stage("Remove unused Docker Images"){
             steps{
                 sh " docker rmi $imageregistry_username_imagename:V$BUILD_NUMBER"
+            }
+        }
+
+
+        stage("kops deploy"){
+            agent{
+                label 'kops'
+            }
+            steps {
+                    sh "helm upgrade --install --force vproifle-stack helm/vprofilecharts --set appimage=${registry}:${BUILD_NUMBER} --namespace prod"
             }
         }
 }
