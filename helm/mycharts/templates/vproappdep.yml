@@ -26,4 +26,4 @@ spec:
         command: ['sh', '-c', 'nslookup vprodb.default.svc.cluster.local; do echo waiting for mydb; sleep 2; done;']
       - name: init-memcache
         image: busybox
-        command: ['sh', '-c', 'nslookup vprodb.default.svc.cluster.local; do echo waiting for mydb; sleep 2; done;']
+        command: ['sh', '-c', 'nslookup vprocache01.default.svc.cluster.local; do echo waiting for mydb; sleep 2; done;']
