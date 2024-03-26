@@ -76,9 +76,6 @@ pipeline{
 
 
         stage("Build Image with Docker"){
-         agent{
-            label 'kops'
-         }
             steps{
                 script{
                     docImage = docker.build imageregistry_username_imagename + ":V$BUILD_NUMBER"
